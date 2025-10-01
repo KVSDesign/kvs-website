@@ -1,6 +1,9 @@
 import { Header } from "./components/Header";
 import { FeaturedProjects } from "./sections/FeaturedProjects";
 import { Hero } from "./sections/Hero";
+import { PeopleBehind } from "./sections/PeopleBehind";
+import { TechStacks } from "./sections/TechStacks";
+import { Testimonials } from "./sections/Testimonials";
 import { WhatIfThis } from "./sections/WhatIfThis";
 
 export default function Home() {
@@ -10,6 +13,9 @@ export default function Home() {
       <Hero />
       <FeaturedProjects />
       <WhatIfThis />
+      <Testimonials />
+      <PeopleBehind />
+      <TechStacks />
     </div>
   );
 }

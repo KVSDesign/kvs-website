@@ -9,13 +9,13 @@ export const ProjectItem = ({ category, tech, imageUrl, description }: ProjectIt
     return (
         <div className="flex flex-col gap-4">
             <p>{`{${category}}`}</p>
-            <p className="ps-[110px]">{`{${tech}}`}</p>
+            <p className="indent-8">{`{${tech}}`}</p>
             <div>
                 <img src={imageUrl} />
             </div>
-            <div>
-                <p className="ps-[110px] text-[#16131499]">{`{DESCRIPTION}`}</p>
-                <p className="ps-[110px] indent-10">{`${description}`}</p>
+            <div className="ps-[110px]">
+                <p className="text-[#16131499]">{`{DESCRIPTION}`}</p>
+                <p className="indent-10">{`${description}`}</p>
             </div>
         </div>
     )

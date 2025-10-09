@@ -14,7 +14,7 @@ export const PeopleBehind = () => {
     };
 
     return (
-        <div className="min-h-screen p-6">
+        <div className="min-h-screen p-6 mb-[200px]">
             <div className='flex gap-[124px] relative'>
                 <div className='rounded-[12px] sticky top-0'>
                     <Lottie

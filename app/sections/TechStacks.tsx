@@ -5,7 +5,7 @@ export const TechStacks = () => {
                 <div className="grid grid-cols-2 mb-[52px]">
                     <h3 className="uppercase">{`{The Work We Do}`}</h3>
                     <div>
-                        <ul className="uppercase">
+                        <ul className="uppercase flex flex-col gap-2">
                             <li>{`{Web design}`}</li>
                             <li>{`{Digital Product Design}`}</li>
                             <li>{`{CRO aka Conversion Rate Optimisation}`}</li>
@@ -20,10 +20,10 @@ export const TechStacks = () => {
                         </ul>
                     </div>
                 </div>
-                <div className="grid grid-cols-2">
+                <div className="grid grid-cols-2 mb-[170px]">
                     <h3 className="uppercase">{`{Those Who Chose Us}`}</h3>
                     <div>
-                        <ul className="uppercase">
+                        <ul className="uppercase flex flex-col gap-2">
                             <li>{`{Riport Applications}`}</li>
                             <li>{`{robert ray}`}</li>
                             <li>{`{Expian}`}</li>
@@ -37,12 +37,16 @@ export const TechStacks = () => {
                             <li>{`{maison21g}`}</li>
                             <li>{`{opportuni}`}</li>
                             <li>{`{hackajob}`}</li>
-                            <li>{`{&merge}`}<span>{`Our product:)`}</span></li>
+                            <li>{`{&merge}`}<sup className="align-super normal-case">Our product:)</sup></li>
                         </ul>
                     </div>
                 </div>
+                <div className="grid grid-cols-2 grid grid-cols-2 uppercase">
+                    <p>{`{Kirilo visual solutions kft}`}</p>
+                    <p className="text-end">{`{Budapest, Hungary}`}</p>
+                </div>
             </div>
-            <div>
+            <div className="flex flex-col justify-between">
                 <p className="text-end font-semibold mb-[260px]">CREATE WHAT OTHERS WON’T DARE TO</p>
                 <div>
                     <img src="/assets/images/logo-lg.png" />

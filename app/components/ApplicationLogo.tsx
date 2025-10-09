@@ -1,7 +1,7 @@
-import Logo from '../assets/images/logo.svg';
+import Image from 'next/image';
 
 export const ApplicationLogo = () => {
     return (
-        <img src="/assets/images/logo.svg" className="w-[66px] h-[56px]" />
+        <Image src="/assets/images/logo.svg" width={66} height={56} alt='KVS' />
     );
 };

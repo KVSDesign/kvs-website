@@ -1,13 +1,120 @@
+'use client'
+import { useRef, useState, useEffect } from "react";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+// ScrollSmoother requires ScrollTrigger
+import { ScrollSmoother } from "gsap/ScrollSmoother";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger, ScrollSmoother);
+
 export const Hero = () => {
+
+    const divRef = useRef<HTMLDivElement>(null);
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const [imageUrls, setImageUrls] = useState<string[]>([]);
+
+
+
+    useGSAP(() => {
+        let timeout: NodeJS.Timeout | null = null;
+        
+        ScrollSmoother.create({
+            smooth: 1,
+            effects: true,
+            smoothTouch: 0.1,
+        });
+
+        gsap.to(divRef, {
+            scrollTrigger: {
+                trigger: '.hero',
+                start: "top center",
+                end: "bottom",
+                markers: true,
+                onUpdate: (self) => {
+                    if (Number(self.progress.toFixed(3)) < 1) {
+                        if (timeout) clearTimeout(timeout);
+                        timeout = setTimeout(() => {
+                            takeSnapshot();
+                        }, 300);
+                    };
+                },
+                onLeave: () => {
+                    console.log('left');
+                },
+            },
+        });
+    });
+
+    // useEffect(() => {
+    //     let lastScrollY = window.scrollY;
+
+    //     const handleScroll = () => {
+    //         const currentScrollY = window.scrollY;
+    //         const screenHeight = window.innerHeight;
+
+    //         if (currentScrollY > lastScrollY) {
+    //             if (currentScrollY >= screenHeight) {
+    //                 setImageUrls([]);
+    //             } else {
+    //                 takeSnapshot();
+    //             }
+    //         }
+
+    //         lastScrollY = currentScrollY;
+    //     };
+
+    //     window.addEventListener("scroll", handleScroll);
+    //     return () => window.removeEventListener("scroll", handleScroll);
+    // }, []);
+
+    const takeSnapshot = () => {
+        const video = videoRef.current;
+        const canvas = canvasRef.current;
+        if (!video || !canvas) return;
+
+        // Match canvas size to video frame
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+
+        // Draw current video frame
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        // Convert to Base64
+        const imageData = canvas.toDataURL("image/png");
+
+        // Store in array
+        setImageUrls((prev) => [...prev, imageData]);
+    };
+
     return (
-        <div className="h-screen relative">
-            <video
-                src="/assets/videos/hero.mov"
-                className="w-full h-full object-cover"
-                autoPlay
-                loop
-                muted
-            />
+        <div ref={divRef} className="hero h-screen relative overflow-hidden">
+            <div className="relative">
+                <video
+                    ref={videoRef}
+                    src="/assets/videos/hero.mov"
+                    className="hero-video w-full h-full object-cover"
+                    autoPlay
+                    loop
+                    muted
+                />
+                <canvas ref={canvasRef} className="hidden" />
+                <div className="absolute w-full h-full bottom-0 left-0 z-100 flex flex-col-reverse justify-start">
+                    {imageUrls.map((src, i) => (
+                        <img
+                            key={i}
+                            src={src}
+                            alt={`snapshot-${i}`}
+                            className="w-full h-[100px] object-cover shadow-[0_10px_20px_rgba(0,0,0,0.3)]"
+                        />
+                    ))}
+                </div>
+            </div>
             <div className="absolute z-10 top-[50%] translate-y-[-50%] left-[140px]">
                 <p className="text-[16px] text-[#C5C4C2] leading-none">{`{KVS}`}</p>
             </div>

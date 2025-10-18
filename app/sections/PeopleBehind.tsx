@@ -1,10 +1,10 @@
 'use client'
 
-import Lottie from 'react-lottie';
+import Lottie, { Options } from 'react-lottie';
 import People from '../assets/lotties/people.json'
 
 export const PeopleBehind = () => {
-    const defaultOptions = {
+    const defaultOptions: Options = {
         loop: true,
         autoplay: true,
         animationData: People,

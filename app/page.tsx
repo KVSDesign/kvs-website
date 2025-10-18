@@ -8,10 +8,10 @@ import { WhatIfThis } from "./sections/WhatIfThis";
 
 export default function Home() {
   return (
-    <div className="w-full bg-[#C5C4C2]">
+    <div className="w-full">
       <Header />
       <Hero />
-      <FeaturedProjects />
+      {/* <FeaturedProjects /> */}
       <WhatIfThis />
       <Testimonials />
       <PeopleBehind />

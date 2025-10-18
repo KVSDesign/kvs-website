@@ -122,7 +122,7 @@
   }
 
   body {
-    @apply font-uncut-sans font-normal text-[16px];
+    @apply font-uncut-sans font-normal text-[16px] bg-[#C5C4C2];
   }
 
   .scrollbar-hide {
@@ -132,5 +132,23 @@
 
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
+  }
+
+  .mask-fluted {
+    /* Horizontal flutes every 50px */
+    mask-image: repeating-linear-gradient(to bottom,
+        black 0,
+        black 25px,
+        transparent 50px);
+    mask-size: 100% 50px;
+
+    -webkit-mask-image: repeating-linear-gradient(to bottom,
+        black 0,
+        black 25px,
+        transparent 50px);
+    -webkit-mask-size: 100% 50px;
+
+    /* Slight softness for realism */
+    filter: blur(2px);
   }
 }

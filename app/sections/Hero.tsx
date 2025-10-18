@@ -16,11 +16,9 @@ export const Hero = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [imageUrls, setImageUrls] = useState<string[]>([]);
 
-
-
     useGSAP(() => {
         let timeout: NodeJS.Timeout | null = null;
-        
+
         ScrollSmoother.create({
             smooth: 1,
             effects: true,
@@ -37,7 +35,7 @@ export const Hero = () => {
                     if (Number(self.progress.toFixed(3)) < 1) {
                         if (timeout) clearTimeout(timeout);
                         timeout = setTimeout(() => {
-                            takeSnapshot();
+                            // takeSnapshot();
                         }, 300);
                     };
                 },
@@ -47,6 +45,61 @@ export const Hero = () => {
             },
         });
     });
+
+    useEffect(() => {
+        let importMap: HTMLScriptElement | null = null;
+        let flutedScript: HTMLScriptElement | null = null;
+
+        const loadImportMap = () =>
+            new Promise<void>((resolve) => {
+                // check if importmap already exists (avoid duplicates)
+                if (document.querySelector('script[type="importmap"]')) {
+                    resolve();
+                    return;
+                }
+
+                importMap = document.createElement("script");
+                importMap.type = "importmap";
+                importMap.defer = true;
+                importMap.innerHTML = JSON.stringify({
+                    imports: {
+                        three:
+                            "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.min.js",
+                    },
+                });
+                document.head.appendChild(importMap);
+
+                // slight delay to let browser register the import map
+                setTimeout(resolve, 50);
+            });
+
+        const loadFlutedGlass = () =>
+            new Promise<void>((resolve, reject) => {
+                flutedScript = document.createElement("script");
+                flutedScript.type = "module";
+                flutedScript.defer = true;
+                flutedScript.src =
+                    "https://cdn.jsdelivr.net/gh/the-lazy-god/tlg-fluted-glass@v2.0.0/tlg-fluted-glass.min.js";
+                flutedScript.onload = () => resolve();
+                flutedScript.onerror = (err) => reject(err);
+                document.body.appendChild(flutedScript);
+            });
+
+        (async () => {
+            try {
+                await loadImportMap();
+                await loadFlutedGlass();
+                console.log("✅ Three.js importmap and Fluted Glass loaded");
+            } catch (err) {
+                console.error("❌ Failed to load scripts:", err);
+            }
+        })();
+
+        return () => {
+            if (importMap) document.head.removeChild(importMap);
+            if (flutedScript) document.body.removeChild(flutedScript);
+        };
+    }, []);
 
     // useEffect(() => {
     //     let lastScrollY = window.scrollY;
@@ -95,14 +148,18 @@ export const Hero = () => {
     return (
         <div ref={divRef} className="hero h-screen relative overflow-hidden">
             <div className="relative">
-                <video
-                    ref={videoRef}
-                    src="/assets/videos/hero.mov"
-                    className="hero-video w-full h-full object-cover"
-                    autoPlay
-                    loop
-                    muted
-                />
+                <div className="relative" tlg-fluted-glass-canvas="">
+                    <img src="/assets/images/chaptr.png" tlg-fluted-glass-image="" />
+                    {/* <video
+                            ref={videoRef}
+                            src="/assets/videos/hero.mov"
+                            className="hero-video w-full h-full object-cover"
+                            tlg-fluted-glass-image=""
+                            autoPlay
+                            loop
+                            muted
+                        /> */}
+                </div>
                 <canvas ref={canvasRef} className="hidden" />
                 <div className="absolute w-full h-full bottom-0 left-0 z-100 flex flex-col-reverse justify-start">
                     {imageUrls.map((src, i) => (

@@ -10,12 +10,16 @@ export default function Home() {
   return (
     <div className="w-full">
       <Header />
-      <Hero />
-      {/* <FeaturedProjects /> */}
-      <WhatIfThis />
-      <Testimonials />
-      <PeopleBehind />
-      <TechStacks />
+      <div className="sticky w-full top-0 left-0">
+        <Hero />
+      </div>
+      <div className="relative z-10 bg-[#C5C4C2]">
+        <FeaturedProjects />
+        <WhatIfThis />
+        <Testimonials />
+        <PeopleBehind />
+        <TechStacks />
+      </div>
     </div>
   );
 }

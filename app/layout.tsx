@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Script from "next/script";
+// @ts-ignore
 import "./globals.css"
 
 export const metadata: Metadata = {

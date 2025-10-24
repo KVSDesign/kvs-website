@@ -16,90 +16,90 @@ export const Hero = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [imageUrls, setImageUrls] = useState<string[]>([]);
 
-    useGSAP(() => {
-        let timeout: NodeJS.Timeout | null = null;
+    // useGSAP(() => {
+    //     let timeout: NodeJS.Timeout | null = null;
 
-        ScrollSmoother.create({
-            smooth: 1,
-            effects: true,
-            smoothTouch: 0.1,
-        });
+    //     ScrollSmoother.create({
+    //         smooth: 1,
+    //         effects: true,
+    //         smoothTouch: 0.1,
+    //     });
 
-        gsap.to(divRef, {
-            scrollTrigger: {
-                trigger: '.hero',
-                start: "top center",
-                end: "bottom",
-                markers: true,
-                onUpdate: (self) => {
-                    if (Number(self.progress.toFixed(3)) < 1) {
-                        if (timeout) clearTimeout(timeout);
-                        timeout = setTimeout(() => {
-                            // takeSnapshot();
-                        }, 300);
-                    };
-                },
-                onLeave: () => {
-                    console.log('left');
-                },
-            },
-        });
-    });
+    //     gsap.to(divRef, {
+    //         scrollTrigger: {
+    //             trigger: '.hero',
+    //             start: "top center",
+    //             end: "bottom",
+    //             markers: true,
+    //             onUpdate: (self) => {
+    //                 if (Number(self.progress.toFixed(3)) < 1) {
+    //                     if (timeout) clearTimeout(timeout);
+    //                     timeout = setTimeout(() => {
+    //                         // takeSnapshot();
+    //                     }, 300);
+    //                 };
+    //             },
+    //             onLeave: () => {
+    //                 console.log('left');
+    //             },
+    //         },
+    //     });
+    // });
 
-    useEffect(() => {
-        let importMap: HTMLScriptElement | null = null;
-        let flutedScript: HTMLScriptElement | null = null;
+    // useEffect(() => {
+    //     let importMap: HTMLScriptElement | null = null;
+    //     let flutedScript: HTMLScriptElement | null = null;
 
-        const loadImportMap = () =>
-            new Promise<void>((resolve) => {
-                // check if importmap already exists (avoid duplicates)
-                if (document.querySelector('script[type="importmap"]')) {
-                    resolve();
-                    return;
-                }
+    //     const loadImportMap = () =>
+    //         new Promise<void>((resolve) => {
+    //             // check if importmap already exists (avoid duplicates)
+    //             if (document.querySelector('script[type="importmap"]')) {
+    //                 resolve();
+    //                 return;
+    //             }
 
-                importMap = document.createElement("script");
-                importMap.type = "importmap";
-                importMap.defer = true;
-                importMap.innerHTML = JSON.stringify({
-                    imports: {
-                        three:
-                            "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.min.js",
-                    },
-                });
-                document.head.appendChild(importMap);
+    //             importMap = document.createElement("script");
+    //             importMap.type = "importmap";
+    //             importMap.defer = true;
+    //             importMap.innerHTML = JSON.stringify({
+    //                 imports: {
+    //                     three:
+    //                         "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.min.js",
+    //                 },
+    //             });
+    //             document.head.appendChild(importMap);
 
-                // slight delay to let browser register the import map
-                setTimeout(resolve, 50);
-            });
+    //             // slight delay to let browser register the import map
+    //             setTimeout(resolve, 50);
+    //         });
 
-        const loadFlutedGlass = () =>
-            new Promise<void>((resolve, reject) => {
-                flutedScript = document.createElement("script");
-                flutedScript.type = "module";
-                flutedScript.defer = true;
-                flutedScript.src =
-                    "https://cdn.jsdelivr.net/gh/the-lazy-god/tlg-fluted-glass@v2.0.0/tlg-fluted-glass.min.js";
-                flutedScript.onload = () => resolve();
-                flutedScript.onerror = (err) => reject(err);
-                document.body.appendChild(flutedScript);
-            });
+    //     const loadFlutedGlass = () =>
+    //         new Promise<void>((resolve, reject) => {
+    //             flutedScript = document.createElement("script");
+    //             flutedScript.type = "module";
+    //             flutedScript.defer = true;
+    //             flutedScript.src =
+    //                 "https://cdn.jsdelivr.net/gh/the-lazy-god/tlg-fluted-glass@v2.0.0/tlg-fluted-glass.min.js";
+    //             flutedScript.onload = () => resolve();
+    //             flutedScript.onerror = (err) => reject(err);
+    //             document.body.appendChild(flutedScript);
+    //         });
 
-        (async () => {
-            try {
-                await loadImportMap();
-                await loadFlutedGlass();
-                console.log("✅ Three.js importmap and Fluted Glass loaded");
-            } catch (err) {
-                console.error("❌ Failed to load scripts:", err);
-            }
-        })();
+    //     (async () => {
+    //         try {
+    //             await loadImportMap();
+    //             await loadFlutedGlass();
+    //             console.log("✅ Three.js importmap and Fluted Glass loaded");
+    //         } catch (err) {
+    //             console.error("❌ Failed to load scripts:", err);
+    //         }
+    //     })();
 
-        return () => {
-            if (importMap) document.head.removeChild(importMap);
-            if (flutedScript) document.body.removeChild(flutedScript);
-        };
-    }, []);
+    //     return () => {
+    //         if (importMap) document.head.removeChild(importMap);
+    //         if (flutedScript) document.body.removeChild(flutedScript);
+    //     };
+    // }, []);
 
     // useEffect(() => {
     //     let lastScrollY = window.scrollY;
@@ -146,45 +146,48 @@ export const Hero = () => {
     };
 
     return (
-        <div ref={divRef} className="hero h-screen relative overflow-hidden">
-            <div className="relative">
-                <div className="relative" tlg-fluted-glass-canvas="">
-                    <img src="/assets/images/chaptr.png" tlg-fluted-glass-image="" />
-                    {/* <video
-                            ref={videoRef}
-                            src="/assets/videos/hero.mov"
-                            className="hero-video w-full h-full object-cover"
-                            tlg-fluted-glass-image=""
-                            autoPlay
-                            loop
-                            muted
-                        /> */}
-                </div>
-                <canvas ref={canvasRef} className="hidden" />
-                <div className="absolute w-full h-full bottom-0 left-0 z-100 flex flex-col-reverse justify-start">
-                    {imageUrls.map((src, i) => (
-                        <img
-                            key={i}
-                            src={src}
-                            alt={`snapshot-${i}`}
-                            className="w-full h-[100px] object-cover shadow-[0_10px_20px_rgba(0,0,0,0.3)]"
-                        />
-                    ))}
-                </div>
-            </div>
-            <div className="absolute z-10 top-[50%] translate-y-[-50%] left-[140px]">
-                <p className="text-[16px] text-[#C5C4C2] leading-none">{`{KVS}`}</p>
-            </div>
-            <div className="absolute z-10 bottom-[16px] left-[16px] grid grid-cols-2 w-[calc(100%-32px)]">
-                <div>
-                    <div className="max-w-[457px]">
-                        <p className="text-[40px] text-[#C5C4C2] leading-none uppercase text-justify">
-                            {`{Every solution is crafted with purpose, ensuring exceptional quality and result}`}
-                        </p>
+        <div ref={divRef} className="h-screen relative overflow-hidden">
+            <div className="relative w-full h-full">
+                {/* <div className="relative">
+                    <div className="relative" tlg-fluted-glass-canvas="">
+
                     </div>
+
+                    <canvas ref={canvasRef} className="hidden" />
+                    <div className="absolute w-full h-full bottom-0 left-0 z-100 flex flex-col-reverse justify-start">
+                        {imageUrls.map((src, i) => (
+                            <img
+                                key={i}
+                                src={src}
+                                alt={`snapshot-${i}`}
+                                className="w-full h-[100px] object-cover shadow-[0_10px_20px_rgba(0,0,0,0.3)]"
+                            />
+                        ))}
+                    </div>
+                </div> */}
+                <video
+                    ref={videoRef}
+                    src="/assets/videos/hero.mov"
+                    className="hero-video w-full h-full object-cover"
+                    tlg-fluted-glass-image=""
+                    autoPlay
+                    loop
+                    muted
+                />
+                <div className="absolute z-10 top-[50%] translate-y-[-50%] left-[140px]">
+                    <p className="text-[16px] text-[#C5C4C2] leading-none">{`{KVS}`}</p>
                 </div>
-                <div className="flex items-end justify-center">
-                    <p className="text-[16px] text-[#C5C4C2] leading-none">{`{47.4979° N, 19.0402° E}`}</p>
+                <div className="absolute z-10 bottom-[16px] left-[16px] grid grid-cols-2 w-[calc(100%-32px)]">
+                    <div>
+                        <div className="max-w-[457px]">
+                            <p className="text-[40px] text-[#C5C4C2] leading-none uppercase text-justify">
+                                {`{Every solution is crafted with purpose, ensuring exceptional quality and result}`}
+                            </p>
+                        </div>
+                    </div>
+                    <div className="flex items-end justify-center">
+                        <p className="text-[16px] text-[#C5C4C2] leading-none">{`{47.4979° N, 19.0402° E}`}</p>
+                    </div>
                 </div>
             </div>
         </div>

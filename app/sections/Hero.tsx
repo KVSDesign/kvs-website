@@ -4,17 +4,33 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-// ScrollSmoother requires ScrollTrigger
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, ScrollSmoother);
 
 export const Hero = () => {
 
+    const containerRef = useRef<HTMLDivElement>(null);
     const divRef = useRef<HTMLDivElement>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [imageUrls, setImageUrls] = useState<string[]>([]);
+
+    useGSAP(
+        () => {
+            ScrollTrigger.create({
+                trigger: divRef.current!,
+                start: 'top top',       // when the section hits the top of viewport
+                end: 'bottom',          // how far it stays pinned (in pixels)
+                pin: true,              // <— the magic part!
+                pinSpacing: false,       // add space below to maintain scroll length
+                markers: false,         // set true to debug
+            });
+        },
+        {
+            scope: containerRef.current!
+        }
+    );
 
     // useGSAP(() => {
     //     let timeout: NodeJS.Timeout | null = null;
@@ -146,25 +162,8 @@ export const Hero = () => {
     };
 
     return (
-        <div ref={divRef} className="h-screen relative overflow-hidden">
-            <div className="relative w-full h-full">
-                {/* <div className="relative">
-                    <div className="relative" tlg-fluted-glass-canvas="">
-
-                    </div>
-
-                    <canvas ref={canvasRef} className="hidden" />
-                    <div className="absolute w-full h-full bottom-0 left-0 z-100 flex flex-col-reverse justify-start">
-                        {imageUrls.map((src, i) => (
-                            <img
-                                key={i}
-                                src={src}
-                                alt={`snapshot-${i}`}
-                                className="w-full h-[100px] object-cover shadow-[0_10px_20px_rgba(0,0,0,0.3)]"
-                            />
-                        ))}
-                    </div>
-                </div> */}
+        <div ref={containerRef} className="h-screen relative overflow-hidden">
+            <div ref={divRef} className="relative w-full h-full">
                 <video
                     ref={videoRef}
                     src="/assets/videos/hero.mov"

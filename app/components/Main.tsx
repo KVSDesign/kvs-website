@@ -18,7 +18,7 @@ interface MainProps extends HTMLProps<HTMLDivElement> {
 
 };
 
-export const Main = ({ children }: MainProps) => {
+export const Main = ({ }: MainProps) => {
     useGSAP(
         () => {
             ScrollSmoother.create({

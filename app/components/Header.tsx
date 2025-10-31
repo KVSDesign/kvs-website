@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from "react";
-import { ApplicationLogo } from "./ApplicationLogo";
 import { SocialLinks } from "./SocialLinks";
 import { SocialNav } from "./SocialNav";
 

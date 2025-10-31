@@ -151,4 +151,12 @@
     /* Slight softness for realism */
     filter: blur(2px);
   }
+
+  .split-parent {
+    overflow: hidden;
+  }
+
+  .split-child {
+    display: inline-block;
+  }
 }

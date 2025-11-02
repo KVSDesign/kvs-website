@@ -10,7 +10,7 @@ export const Testimonials = () => {
                 <div className="flex flex-col items-center">
                     <p className="text-[16px] text-[#161314] text-center mb-[60px]">{`{Straight from the client}`}</p>
                     <div>
-                        <img src="/assets/images/quick2.png" />
+                        <img src="/assets/images/quick2.png" alt="kvs" />
                     </div>
                 </div>
             </div>

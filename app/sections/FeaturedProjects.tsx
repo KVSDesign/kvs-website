@@ -18,6 +18,8 @@ export const FeaturedProjects = () => {
     const [openedProject, setOpenedProject] = useState<Project | null>(null);
     const divRef = useRef<HTMLDivElement>(null);
     const navRef = useRef<HTMLDivElement>(null);
+    const detailDivRef = useRef<HTMLDivElement>(null);
+    const itemDivRef = useRef<HTMLDivElement>(null);
 
     useGSAP(
         () => {
@@ -38,6 +40,25 @@ export const FeaturedProjects = () => {
     useGSAP(
         () => {
             ScrollTrigger.refresh();
+
+            const elItem = itemDivRef.current;
+            const elDetail = detailDivRef.current;
+            if (!elItem || !elDetail) return;
+
+            gsap.to(elItem, {
+                width: openedProject ? 692 : 460,
+                marginLeft: openedProject ? 'calc(100% - 692px)' : 'calc(100% - 460px)',
+                duration: 0.5,
+                ease: 'power2.inOut',
+            });
+
+            gsap.to(elDetail, {
+                width: openedProject
+                    ? 'calc(100% - 460px - 24px)'
+                    : 'calc(100% - 692px - 24px)',
+                duration: 0.5,
+                ease: 'power2.inOut',
+            });
         },
         {
             dependencies: [openedProject],
@@ -56,6 +77,8 @@ export const FeaturedProjects = () => {
                 ease: "power2.out",
             });
         }
+
+
     }, [searchParams]);
 
     const handleClick = (project: Project) => {
@@ -65,7 +88,7 @@ export const FeaturedProjects = () => {
     return (
         <div ref={divRef} className="min-h-screen px-6 pb-6 mb-[200px]">
             <div className="relative">
-                <div className="absolute top-0 left-0 w-[calc(100%-692px-24px)] aria-[expanded=true]:w-[calc(100%-460px-24px)]" aria-expanded={openedProject ? 'false' : 'true'}>
+                <div ref={detailDivRef} className="absolute top-0 left-0" aria-expanded={openedProject ? 'false' : 'true'}>
                     <div ref={navRef} className="max-h-full h-screen py-6">
                         {
                             openedProject ? (
@@ -97,7 +120,7 @@ export const FeaturedProjects = () => {
                         }
                     </div>
                 </div>
-                <div className="w-[460px] ms-[calc(100%-460px)] pt-6 transition-all duration-300 aria-[expanded=true]:ms-[calc(100%-692px)] aria-[expanded=true]:w-[692px] relative" aria-expanded={openedProject ? 'true' : 'false'}>
+                <div ref={itemDivRef} className="pt-6 relative" aria-expanded={openedProject ? 'true' : 'false'}>
                     <div className="flex flex-col gap-[60px]">
                         {
                             projects.map((project, i) => {

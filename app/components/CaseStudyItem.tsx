@@ -58,7 +58,7 @@ export const CaseStudyItem = ({ caseStudy }: CaseStudyItemProps) => {
                             <div key={`case-study-${caseStudy.slug}-image-url-${i}`} className="bg-[#161314] rounded-[12px] h-[800px] flex items-center justify-center">
                                 <div>
                                     <p className="text-[#C5C4C2] mb-4 uppercase text-[16px]">{`{${imageUrl.title}}`}</p>
-                                    <img src={imageUrl.url} className="max-h-[350px]" />
+                                    <img src={imageUrl.url} className="max-h-[350px]" alt="kvs" />
                                 </div>
                             </div>
                         )

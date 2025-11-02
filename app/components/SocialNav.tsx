@@ -15,10 +15,6 @@ export const SocialNav = ({ scrolled }: SocialNavProps) => {
         };
     }, [scrolled]);
 
-    const handleClickOutside = () => {
-        
-    };
-
     const handleClick = () => {
         setOpen((prev) => !prev);
     };

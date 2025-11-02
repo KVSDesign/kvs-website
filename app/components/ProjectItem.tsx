@@ -20,8 +20,7 @@ export type Project = {
     techStacks: string[],
     lotties: {
         title: string,
-        // @ts-ignore
-        data: any,
+        data: unknown,
     }[]
 };
 
@@ -33,6 +32,7 @@ interface ProjectItemProps {
 
 export const ProjectItem = ({ project, isSelected, onClick }: ProjectItemProps) => {
     const divRef = useRef<HTMLDivElement>(null);
+    const overlayRef = useRef<HTMLDivElement>(null);
     const imageContainerRef = useRef<HTMLDivElement>(null);
     const logoRef = useRef<HTMLImageElement>(null);
     const lottieContainerRef = useRef<HTMLDivElement>(null);
@@ -48,25 +48,6 @@ export const ProjectItem = ({ project, isSelected, onClick }: ProjectItemProps) 
 
     useGSAP(
         () => {
-            const container = imageContainerRef.current!;
-            const logo = logoRef.current!;
-            const lottieDiv = lottieContainerRef.current!;
-
-            const tl = gsap.timeline({
-                paused: true,
-                defaults: { ease: "power1.out", duration: 0.6 },
-            });
-
-            tl.to(logo, { y: -200 }, 0)
-                .to(
-                    lottieDiv,
-                    { scale: 1, opacity: 1, duration: 0.8, delay: 0.6, ease: "back.out(1.7)" },
-                    0
-                );
-
-            container.addEventListener("mouseenter", () => tl.play());
-            container.addEventListener("mouseleave", () => tl.reverse());
-
             ScrollTrigger.create({
                 trigger: divRef.current!,
                 start: 'top',
@@ -83,22 +64,74 @@ export const ProjectItem = ({ project, isSelected, onClick }: ProjectItemProps) 
                     };
                 }
             });
-
-
-
-            // Cleanup on unmount
-            return () => {
-                container.removeEventListener("mouseenter", () => tl.play());
-                container.removeEventListener("mouseleave", () => tl.reverse());
-            };
         },
         {
-            scope: divRef
+            scope: divRef,
+        }
+    );
+
+    useGSAP(
+        () => {
+            const container = imageContainerRef.current!;
+            const overlay = overlayRef.current!;
+            const logo = logoRef.current!;
+            const lottieDiv = lottieContainerRef.current!;
+
+            // Define these once so they can be removed correctly
+            const tl = gsap.timeline({
+                paused: true,
+                defaults: { ease: "power1.out", duration: 0.6 },
+            });
+
+            if (!isSelected) {
+                const play = () => tl.play();
+                const reverse = () => tl.reverse();
+
+                tl.to(logo, { y: -200 }, 0)
+                    .to(
+                        lottieDiv,
+                        {
+                            scale: 1,
+                            opacity: 1,
+                            duration: 0.8,
+                            delay: 0.6,
+                            ease: "back.out(1.7)",
+                        },
+                        0
+                    );
+
+                // Add listeners
+                container.addEventListener("mouseenter", play);
+                container.addEventListener("mouseleave", reverse);
+
+                // Cleanup hover listeners when dependency changes or unmounts
+                return () => {
+                    container.removeEventListener("mouseenter", play);
+                    container.removeEventListener("mouseleave", reverse);
+                    tl.kill();
+                };
+
+            };
+
+            gsap.to(logo, {
+                display: 'none',
+            });
+
+            gsap.to(overlay, {
+                scale: 1,
+            });
+
+
+        },
+        {
+            scope: divRef,
+            dependencies: [isSelected],
         }
     );
 
     const handleClick = (evt: MouseEvent<HTMLAnchorElement>) => {
         evt.preventDefault();
+        if (isSelected !== null) return;
         onClick(project);
     };
 
@@ -114,13 +147,14 @@ export const ProjectItem = ({ project, isSelected, onClick }: ProjectItemProps) 
             }
             <Link href={`?cs=${project.slug}`} className="block" onClick={handleClick}>
                 <div ref={imageContainerRef} className="w-full h-[641px] rounded-[12px] bg-no-repeat bg-center bg-cover flex flex-col items-center justify-center gap-2 relative" style={{ backgroundImage: `url(${project.thumbnailUrl})` }}>
-
+                    <div ref={overlayRef} className="bg-[#161314] w-full h-full absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rounded-[12px] scale-0"></div>
                     <img
                         ref={logoRef}
                         src={project.logoUrl}
-                        className="mix-blend-difference transition-transform absolute"
+                        className="mix-blend-difference transition-transform absolute z-10"
+                        alt="kvs"
                     />
-                    <div ref={lottieContainerRef} className="absolute h-[250px] overflow-hidden scale-0 opacity-0 flex items-center justify-center">
+                    <div ref={lottieContainerRef} className="absolute h-[250px] overflow-hidden scale-0 opacity-0 flex items-center justify-center z-10" style={{ scale: isSelected ? '1' : '' }}>
                         <Lottie
                             options={lottieOptions}
                             isClickToPauseDisabled={true}

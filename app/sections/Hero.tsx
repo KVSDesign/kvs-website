@@ -1,5 +1,5 @@
 'use client'
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -13,8 +13,8 @@ export const Hero = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const divRef = useRef<HTMLDivElement>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
-    const canvasRef = useRef<HTMLCanvasElement>(null);
-    const [imageUrls, setImageUrls] = useState<string[]>([]);
+    // const canvasRef = useRef<HTMLCanvasElement>(null);
+    // const [imageUrls, setImageUrls] = useState<string[]>([]);
 
     useGSAP(
         () => {
@@ -139,27 +139,27 @@ export const Hero = () => {
     //     return () => window.removeEventListener("scroll", handleScroll);
     // }, []);
 
-    const takeSnapshot = () => {
-        const video = videoRef.current;
-        const canvas = canvasRef.current;
-        if (!video || !canvas) return;
+    // const takeSnapshot = () => {
+    //     const video = videoRef.current;
+    //     const canvas = canvasRef.current;
+    //     if (!video || !canvas) return;
 
-        // Match canvas size to video frame
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
+    //     // Match canvas size to video frame
+    //     canvas.width = video.videoWidth;
+    //     canvas.height = video.videoHeight;
 
-        const ctx = canvas.getContext("2d");
-        if (!ctx) return;
+    //     const ctx = canvas.getContext("2d");
+    //     if (!ctx) return;
 
-        // Draw current video frame
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    //     // Draw current video frame
+    //     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-        // Convert to Base64
-        const imageData = canvas.toDataURL("image/png");
+    //     // Convert to Base64
+    //     const imageData = canvas.toDataURL("image/png");
 
-        // Store in array
-        setImageUrls((prev) => [...prev, imageData]);
-    };
+    //     // Store in array
+    //     setImageUrls((prev) => [...prev, imageData]);
+    // };
 
     return (
         <div ref={containerRef} className="h-screen relative overflow-hidden">

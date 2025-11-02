@@ -1,6 +1,5 @@
 'use client'
 
-import { HTMLProps } from "react";
 import { Hero } from "../sections/Hero";
 import { FeaturedProjects } from "../sections/FeaturedProjects";
 import { PeopleBehind } from "../sections/PeopleBehind";
@@ -11,14 +10,11 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import gsap from 'gsap';
+import { Suspense } from "react";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, ScrollSmoother);
 
-interface MainProps extends HTMLProps<HTMLDivElement> {
-
-};
-
-export const Main = ({ }: MainProps) => {
+export const Main = () => {
     useGSAP(
         () => {
             ScrollSmoother.create({
@@ -32,7 +28,9 @@ export const Main = ({ }: MainProps) => {
         <main id="smooth-wrapper">
             <div id="smooth-content">
                 <Hero />
-                <FeaturedProjects />
+                <Suspense fallback={<></>}>
+                    <FeaturedProjects />
+                </Suspense>
                 <WhatIfThis />
                 <Testimonials />
                 <PeopleBehind />

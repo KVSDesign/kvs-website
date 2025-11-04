@@ -34,3 +34,21 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+
+
+1. Compress the lotties/images/videos through https://www.tinylottie.studio/.
+2. Make the case studies navigation clickable.
+3. Mask progress loader animation to work like a snake.
+4. Fix the issue in case study navigation where it overlaps the next section.
+5. Export case study logos as svgs.
+6. Speed up case study hover animation. Decrease to 0.4 maximum.
+7. Remove the bounce effect of the lottie.
+8. Remove case study logo animation and make it overlayed on top of the lottie.
+9. Fix case study click event.
+10. Case study should be overlayed.
+11. Case study details shouldn't scroll further.
+11. Case study details animation should be by words and as scramble. (include close button)
+12. Case study navigation should scramble out-in whenever the case study was clicked.
+13. Case study mobile lotties should be larger.

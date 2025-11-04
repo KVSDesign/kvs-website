@@ -87,7 +87,8 @@ export const ProjectItem = ({ project, isSelected, onClick }: ProjectItemProps) 
                 const play = () => tl.play();
                 const reverse = () => tl.reverse();
 
-                tl.to(logo, { y: -200 }, 0)
+                tl
+                    .to(logo, { y: -200 }, 0)
                     .to(
                         lottieDiv,
                         {

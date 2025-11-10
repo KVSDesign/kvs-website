@@ -1,9 +1,9 @@
-import { Project } from "../components/ProjectItem";
 import Link from "next/link";
 import { ApplicationLogo } from "../components/ApplicationLogo";
 import gsap from 'gsap';
 import { SplitText } from 'gsap/SplitText';
 import { useGSAP } from "@gsap/react";
+import { Project } from "../types/Project";
 
 gsap.registerPlugin(SplitText);
 

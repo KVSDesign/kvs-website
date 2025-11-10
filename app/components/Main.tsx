@@ -12,14 +12,13 @@ import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import gsap from 'gsap';
 import { Suspense } from "react";
 
-gsap.registerPlugin(useGSAP, ScrollTrigger, ScrollSmoother);
+gsap.registerPlugin(useGSAP);
 
 export const Main = () => {
     useGSAP(
         () => {
             ScrollSmoother.create({
                 smooth: 2,
-                effects: true,
             });
         }
     );

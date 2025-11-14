@@ -12,5 +12,6 @@ export type Project = {
     lotties: {
         title: string,
         data: unknown,
+        larger: boolean,
     }[]
 };

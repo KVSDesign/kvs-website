@@ -1,17 +1,19 @@
+import Link from "next/link";
+
 export const SocialLinks = () => {
     return (
         <ul className="flex flex-col gap-6 text-primary text-end">
             <li>
-                <a href="#">EMAIL</a>
+                <Link href="#" target="_blank">EMAIL</Link>
             </li>
             <li>
-                <a href="#">LINKEDIN</a>
+                <Link href="https://www.linkedin.com/company/kvsdesign" target="_blank">LINKEDIN</Link>
             </li>
             <li>
-                <a href="#">YOUTUBE</a>
+                <Link href="https://www.youtube.com/@KVS.design" target="_blank">YOUTUBE</Link>
             </li>
             <li>
-                <a href="#">INSTAGRAM</a>
+                <Link href="https://www.instagram.com/kvs.services" target="_blank">INSTAGRAM</Link>
             </li>
         </ul>
     )

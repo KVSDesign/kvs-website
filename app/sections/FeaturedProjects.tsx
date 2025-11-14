@@ -9,15 +9,19 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import gsap from 'gsap';
 import { ProjectDetail } from "../components/ProjectDetail";
 import { Project } from "../types/Project";
+import { smoother } from "../components/Main";
+import { ScrollSmoother } from 'gsap/ScrollSmoother';
+import { cn } from "@/lib/utils";
 
 gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
 
 export const FeaturedProjects = () => {
-    const [openedProject, setOpenedProject] = useState<Project | null>(null);
     const divRef = useRef<HTMLDivElement>(null);
     const navRef = useRef<HTMLDivElement>(null);
     const detailRef = useRef<HTMLDivElement>(null);
     const projectsRef = useRef<HTMLDivElement>(null);
+
+    const [openedProject, setOpenedProject] = useState<Project | null>(null);
 
     useGSAP(
         () => {
@@ -52,9 +56,21 @@ export const FeaturedProjects = () => {
                 marginLeft: openedProject ? 'calc(100% - 692px)' : 'calc(100% - 460px)',
                 duration: 0.5,
                 ease: 'power2.inOut',
+                onComplete: () => {
+                    if (!openedProject) return;
+
+                    gsap.to(window, {
+                        duration: .2,
+                        scrollTo: { y: `#${openedProject.slug}`, offsetY: 16, autoKill: true },
+                        ease: "power2.out",
+                        overwrite: true,
+                    });
+                }
             });
+
         },
         {
+            scope: divRef,
             dependencies: [openedProject],
         }
     );
@@ -67,8 +83,18 @@ export const FeaturedProjects = () => {
         });
     };
 
+    const handleProjectClose = () => {
+        setOpenedProject(null);
+        if (!smoother) return;
+    };
+
+    const handleProjectOpen = (project: Project | null) => {
+        setOpenedProject(project);
+        if (!smoother || !project || !detailRef.current) return;
+    };
+
     return (
-        <div ref={divRef} className="relative min-h-screen px-6 pb-6 mb-[200px]">
+        <div ref={divRef} className="relative min-h-screen px-6 pb-6 mb-[200px]" id="featured-projects">
             <div className="relative">
                 <div ref={detailRef} className="absolute top-0 left-0" style={{ width: 'calc(100% - 460px - 24px)' }}>
                     <div ref={navRef} className="py-6 bg-[#C5C4C2]">
@@ -100,7 +126,7 @@ export const FeaturedProjects = () => {
                             ) : (
                                 <ProjectDetail
                                     project={openedProject}
-                                    onClose={() => setOpenedProject(null)}
+                                    onClose={handleProjectClose}
                                 />
                             )
                         }
@@ -115,7 +141,7 @@ export const FeaturedProjects = () => {
                                         key={`project-item-${i}`}
                                         project={project}
                                         selected={openedProject ? openedProject.slug === project.slug : null}
-                                        onSelect={setOpenedProject}
+                                        onSelect={handleProjectOpen}
                                     />
                                 )
                             })
@@ -123,6 +149,6 @@ export const FeaturedProjects = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 };

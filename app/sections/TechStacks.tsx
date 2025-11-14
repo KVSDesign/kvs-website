@@ -49,7 +49,7 @@ export const TechStacks = () => {
             <div className="flex flex-col justify-between">
                 <p className="text-end font-semibold mb-[260px]">CREATE WHAT OTHERS WON’T DARE TO</p>
                 <div>
-                    <img src="/assets/images/logo-lg.png" alt="kvs" />
+                    <img src="/assets/images/logo-lg.svg" alt="kvs" />
                 </div>
             </div>
         </div>

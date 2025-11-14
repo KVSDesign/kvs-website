@@ -1,6 +1,6 @@
 export const WhatIfThis = () => {
     return (
-        <div className="h-screen p-6 flex flex-col items-stretch mb-[200px]">
+        <div className="h-screen p-6 flex flex-col items-stretch mb-[200px] cursor-pointer">
             <div className="flex-1">
                 <p className="text-[32px] text-[#161314] font-semibold">WHAT IF THIS</p>
             </div>

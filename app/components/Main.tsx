@@ -7,27 +7,26 @@ import { TechStacks } from "../sections/TechStacks";
 import { Testimonials } from "../sections/Testimonials";
 import { WhatIfThis } from "../sections/WhatIfThis";
 import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import gsap from 'gsap';
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 
 gsap.registerPlugin(useGSAP);
+export let smoother: ScrollSmoother | null = null;
 
 export const Main = () => {
-    useGSAP(
-        () => {
-            ScrollSmoother.create({
-                smooth: 2,
-            });
-        }
-    );
+
+    useEffect(() => {
+        smoother = ScrollSmoother.create({
+            smooth: 2,
+        });
+    }, []);
 
     return (
         <main id="smooth-wrapper">
             <div id="smooth-content">
                 <Hero />
-                <Suspense fallback={<></>}>
+                <Suspense>
                     <FeaturedProjects />
                 </Suspense>
                 <WhatIfThis />

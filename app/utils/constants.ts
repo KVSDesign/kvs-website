@@ -1,5 +1,3 @@
-import { Project } from "../components/ProjectItem";
-
 import QUiCKMain from '@/app/assets/lotties/quick/quick-main.json'
 import QUiCK1 from '@/app/assets/lotties/quick/quick-1.json'
 import QUiCK2 from '@/app/assets/lotties/quick/quick-2.json'
@@ -44,6 +42,7 @@ import Solo603 from '@/app/assets/lotties/solo60/solo60-3.json'
 import Solo604 from '@/app/assets/lotties/solo60/solo60-4.json'
 import Solo605 from '@/app/assets/lotties/solo60/solo60-5.json'
 import Solo606 from '@/app/assets/lotties/solo60/solo60-6.json'
+import { Project } from '../types/Project'
 
 export const projects: Project[] = [
     {
@@ -52,7 +51,7 @@ export const projects: Project[] = [
         category: 'FINTECH',
         tech: 'CHROME EXTENSION',
         thumbnailUrl: '/assets/images/quick.jpg',
-        logoUrl: '/assets/images/quick-logo.png',
+        logoUrl: '/assets/images/quick-logo.svg',
         shortDescription: 'QUICK is part of the Riport fintech suite, focused on simplifying financial tracking for micro to medium-sized businesses as an accessible alternative to costly ERP systems.',
         description1: 'is part of the Riport fintech suite, focused on simplifying financial tracking for micro to medium-sized businesses as an accessible alternative to costly ERP systems. Our studio partnered with QUiCK to design and build a Chrome extension that streamlines document and invoice uploads, enabling smoother financial workflows.',
         description2: 'Our work included solution research, flow mapping, and creating a new design style with wireframes for all main screens. We delivered final designs with a refreshed visual system, custom Lottie animations, and pixel-perfect front-end implementation. Development introduced advanced features like document scanning, href tracking, and a programmable document interceptor. Together, these improvements ensured seamless backend integration and a more intuitive, efficient user experience.',
@@ -68,23 +67,28 @@ export const projects: Project[] = [
         lotties: [
             {
                 title: 'MAIN WEBM',
-                data: QUiCKMain
+                data: QUiCKMain,
+                larger: false
             },
             {
                 title: 'QUiCK 1',
-                data: QUiCK1
+                data: QUiCK1,
+                larger: false
             },
             {
                 title: 'QUiCK 2',
-                data: QUiCK2
+                data: QUiCK2,
+                larger: false
             },
             {
                 title: 'QUiCK 3',
-                data: QUiCK3
+                data: QUiCK3,
+                larger: false
             },
             {
                 title: 'QUiCK 4',
-                data: QUiCK4
+                data: QUiCK4,
+                larger: false
             },
         ],
     },
@@ -94,7 +98,7 @@ export const projects: Project[] = [
         category: 'B2B2C ENTERPRISE TICKETING',
         tech: 'WEB APP, POS',
         thumbnailUrl: '/assets/images/expian.jpg',
-        logoUrl: '/assets/images/expian-logo.png',
+        logoUrl: '/assets/images/expian-logo.svg',
         shortDescription: 'Expian (formerly Ticknovate) is an experience-driven ticketing platform built to meet the complex demands of enterprise organisations.',
         description1: 'formerly Ticknovate, is an experience-focused ticketing platform built for enterprise organisations. Over two years, our work spanned multiple interconnected platforms, addressing both immediate design challenges and long-term strategic needs, while also supporting the onboarding of new enterprise clients.',
         description2: 'This included building a new design system, redesigning the support team portal, and creating dedicated portals for trade partners and customer-facing B2C experiences. We urgently improved their POS software design, developed a new (yet to be implemented) POS concept, and helped position the platform to successfully land multiple enterprise clients.',
@@ -109,35 +113,43 @@ export const projects: Project[] = [
         lotties: [
             {
                 title: 'MAIN WEBM',
-                data: ExpianMain
+                data: ExpianMain,
+                larger: false
             },
             {
                 title: 'Expian 1',
-                data: Expian1
+                data: Expian1,
+                larger: true
             },
             {
                 title: 'Expian 2',
-                data: Expian2
+                data: Expian2,
+                larger: false
             },
             {
                 title: 'Expian 3',
-                data: Expian3
+                data: Expian3,
+                larger: true
             },
             {
                 title: 'Expian 4',
-                data: Expian4
+                data: Expian4,
+                larger: false
             },
             {
                 title: 'Expian 5',
-                data: Expian5
+                data: Expian5,
+                larger: true
             },
             {
                 title: 'Expian 6',
-                data: Expian6
+                data: Expian6,
+                larger: false
             },
             {
                 title: 'Expian 7',
-                data: Expian7
+                data: Expian7,
+                larger: true
             },
         ],
     },
@@ -147,7 +159,7 @@ export const projects: Project[] = [
         category: 'INFLUENCER MARKETING',
         tech: 'WEB APP, WEBSITE',
         thumbnailUrl: '/assets/images/givell.jpg',
-        logoUrl: '/assets/images/givell-logo.png',
+        logoUrl: '/assets/images/givell-logo.svg',
         shortDescription: 'Givell is a platform for content creators to receive donations through tasks and requests,  helping them boost engagement and unlock new revenue streams.',
         description1: 'is a web application designed for content creators, enabling them to receive donations through task completion. As our studio’s first startup venture, co-founded by Kirilo, Klym and Sebastian, the project set out to enhance the lives of content creators by helping them generate additional revenue and foster stronger engagement with their audiences.',
         description2: 'Our work spanned product, design, and communication, including the creation of a new design system, the definition of the platform’s overall style, and the development of marketing campaigns and creative assets. We also produced professional pitch decks and investor communications, helping establish the foundations of the platform while driving both its product vision and early-stage growth.',
@@ -163,35 +175,43 @@ export const projects: Project[] = [
         lotties: [
             {
                 title: 'MAIN WEBM',
-                data: GivellMain
+                data: GivellMain,
+                larger: false
             },
             {
                 title: 'Givell 1',
-                data: Givell1
+                data: Givell1,
+                larger: true
             },
             {
                 title: 'Givell 2',
-                data: Givell2
+                data: Givell2,
+                larger: false
             },
             {
                 title: 'Givell 3',
-                data: Givell3
+                data: Givell3,
+                larger: true
             },
             {
                 title: 'Givell 4',
-                data: Givell4
+                data: Givell4,
+                larger: false
             },
             {
                 title: 'Givell 5',
-                data: Givell5
+                data: Givell5,
+                larger: true
             },
             {
                 title: 'Givell 6',
-                data: Givell6
+                data: Givell6,
+                larger: false
             },
             {
                 title: 'Givell 7',
-                data: Givell7
+                data: Givell7,
+                larger: true
             },
         ],
     },
@@ -201,7 +221,7 @@ export const projects: Project[] = [
         category: 'AI STORY GENERATION',
         tech: 'MOBILE APP',
         thumbnailUrl: '/assets/images/chaptr.jpg',
-        logoUrl: '/assets/images/chaptr-logo.png',
+        logoUrl: '/assets/images/chaptr-logo.svg',
         shortDescription: 'Chaptr is a Web3 and AI startup in the publishing space. One of its flagship products, Stori, is a mobile app that generates personalised children’s stories with the help of AI.',
         description1: 'is an AI startup focused on developing innovative solutions for the publishing sector. We partnered with the team to lead the design of Stori, an AI-powered children’s storytelling app. Once the design was completed and the app built, Stori was showcased on Google’s main stage during a Google Bard presentation, introducing our design to a global audience.',
         description2: 'Our work included developing a comprehensive design system with a component library, style guides, and design rules; collaborating with a renowned Creative Director to define the app’s vision, aesthetics, and micro-interactions; and designing a visually engaging native application for both iOS and Android platforms. This collaboration also gave us early hands-on experience with AI before its mainstream adoption, strengthening our expertise in integrating AI from both a design and technical perspective.',
@@ -215,23 +235,28 @@ export const projects: Project[] = [
         lotties: [
             {
                 title: 'MAIN WEBM',
-                data: ChaptrMain
+                data: ChaptrMain,
+                larger: true
             },
             {
                 title: 'Chaptr 1',
-                data: Chaptr1
+                data: Chaptr1,
+                larger: true
             },
             {
                 title: 'Chaptr 2',
-                data: Chaptr2
+                data: Chaptr2,
+                larger: true
             },
             {
                 title: 'Chaptr 3',
-                data: Chaptr3
+                data: Chaptr3,
+                larger: true
             },
             {
                 title: 'Chaptr 4',
-                data: Chaptr4
+                data: Chaptr4,
+                larger: true
             },
         ],
     },
@@ -241,7 +266,7 @@ export const projects: Project[] = [
         category: 'RECRUITMENT',
         tech: 'ADMIN PANEL',
         thumbnailUrl: '/assets/images/alteam.jpg',
-        logoUrl: '/assets/images/alteam-logo.png',
+        logoUrl: '/assets/images/alteam-logo.svg',
         shortDescription: 'Alteam is a recruitment platform connecting clients with world-class freelancers and contractors across industries.',
         description1: 'connects product experts with startups and venture builders, supporting growth from MVP through scaling. Our studio partnered with Alteam in its early conceptual phase to design an admin panel that would help build a collective of skilled professionals and manage talent, clients, and job listings. Although the company has since pivoted, the admin panel we designed continues to be used in the platform’s refreshed version to fulfill its original purpose.',
         description2: 'Our work included creating a detailed design system with a comprehensive component library, style guides, and design principles; collaborating closely with the founder to shape and execute the product vision; and producing design prototypes for demos and investor presentations that clearly represented the platform’s potential. We delivered the product under tight deadlines with a focus on a desktop-only interface.',
@@ -254,27 +279,33 @@ export const projects: Project[] = [
         lotties: [
             {
                 title: 'MAIN WEBM',
-                data: AlteamMain
+                data: AlteamMain,
+                larger: false
             },
             {
                 title: 'Alteam 1',
-                data: Alteam1
+                data: Alteam1,
+                larger: true
             },
             {
                 title: 'Alteam 2',
-                data: Alteam2
+                data: Alteam2,
+                larger: false
             },
             {
                 title: 'Alteam 3',
-                data: Alteam3
+                data: Alteam3,
+                larger: false
             },
             {
                 title: 'Alteam 4',
-                data: Alteam4
+                data: Alteam4,
+                larger: false
             },
             {
                 title: 'Alteam 5',
-                data: Alteam5
+                data: Alteam5,
+                larger: false
             },
         ],
     },
@@ -284,7 +315,7 @@ export const projects: Project[] = [
         category: 'FITNESS, PROP-TECH',
         tech: 'WEBSITE, MOBILE APP',
         thumbnailUrl: '/assets/images/solo60.jpg',
-        logoUrl: '/assets/images/solo60-logo.png',
+        logoUrl: '/assets/images/solo60-logo.svg',
         shortDescription: 'Solo60 is a network of bookable wellness spaces, available solo, with friends, or with clients, for sessions starting at just 60 minutes.',
         description1: 'is a startup transforming unused London spaces into accessible gyms. Using a credits and subscription model, the app lets gym-goers and trainers rent spaces for private or group sessions. Our studio partnered with SoloSixty to redesign their web and app interfaces, focusing on user experience and a smoother booking flow to attract new users and fix issues the old design couldn’t.',
         description2: 'We conducted market and competitor research, created a new site map and wireframes with the founder, and redesigned the website with clear, SEO-optimised pages to drive downloads. We also refreshed the app interface for better usability, clarity, and booking flow based on user feedback. These improvements positioned the platform to grow its user base through a significantly stronger customer experience.',
@@ -297,31 +328,38 @@ export const projects: Project[] = [
         lotties: [
             {
                 title: 'MAIN WEBM',
-                data: Solo60Main
+                data: Solo60Main,
+                larger: false
             },
             {
                 title: 'Solo60 1',
-                data: Solo601
+                data: Solo601,
+                larger: true
             },
             {
                 title: 'Solo60 2',
-                data: Solo602
+                data: Solo602,
+                larger: true
             },
             {
                 title: 'Solo60 3',
-                data: Solo603
+                data: Solo603,
+                larger: true
             },
             {
                 title: 'Solo60 4',
-                data: Solo604
+                data: Solo604,
+                larger: true
             },
             {
                 title: 'Solo60 5',
-                data: Solo605
+                data: Solo605,
+                larger: true
             },
             {
                 title: 'Solo60 6',
-                data: Solo606
+                data: Solo606,
+                larger: true
             },
         ],
     },

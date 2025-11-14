@@ -167,7 +167,16 @@ export const Hero = () => {
                 <video
                     ref={videoRef}
                     src="/assets/videos/hero.mov"
-                    className="hero-video w-full h-full object-cover"
+                    className="hero-video w-full h-full object-cover max-lg:hidden"
+                    tlg-fluted-glass-image=""
+                    autoPlay
+                    loop
+                    muted
+                />
+                <video
+                    ref={videoRef}
+                    src="/assets/videos/hero-sm.mov"
+                    className="hero-video w-full h-full object-cover lg:hidden"
                     tlg-fluted-glass-image=""
                     autoPlay
                     loop
